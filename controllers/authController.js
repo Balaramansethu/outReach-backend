@@ -8,7 +8,7 @@ const {
 const { validatePassword } = require("../services/userService")
 
 const signup = async (req, res) => {
-    const { name, email, password } = req.body
+    const { username, email, password } = req.body
 
     try {
         const existingUser = await findUserByEmailFromDB(email)
@@ -24,7 +24,7 @@ const signup = async (req, res) => {
         }
 
         const newUserData = {
-            name,
+            username,
             email,
             password,
         }
