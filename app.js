@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const { ENV } = require('././utils/env');
 const connectToDatabase = require('./database/connection');
 const authRoute = require('./routes/authRoute.js');
+const templateRoutes = require('./routes/templateRoute.js')
 
 const app = express();
 
@@ -22,6 +23,8 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/v1/auth', authRoute);
+
+app.use('/api/v1/template', templateRoutes);
 
 connectToDatabase()
     .then(() => {
