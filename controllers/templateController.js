@@ -1,11 +1,8 @@
 const Template = require('../models/template');
+const { extractVariables } = require('../validators/templateValidator');
 
-const extractVariables = (text) => {
-  const matches = text.match(/{{\s*([\w]+)\s*}}/g);
-  return matches ? [...new Set(matches.map(v => v.replace(/{{\s*|\s*}}/g, '')))] : [];
-};
 
-exports.createTemplate = async (req, res) => {
+const createTemplate = async (req, res) => {
   try {
     const { subject, body } = req.body;
 
@@ -25,4 +22,8 @@ exports.createTemplate = async (req, res) => {
     console.error('Error creating template:', error);
     res.status(500).json({ message: 'Internal server error' });
   }
+};
+
+module.exports = {
+  createTemplate,
 };
